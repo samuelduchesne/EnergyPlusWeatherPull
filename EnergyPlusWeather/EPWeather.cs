@@ -58,7 +58,7 @@ namespace EnergyPlusWeather
 
                         }
                         //get the hourly data
-                        if (linect > 6)
+                        if (linect > 7)
                         {
                             HourlyWeatherData epw = new HourlyWeatherData();
                             epw.Year = csv.GetField<int>(0);
