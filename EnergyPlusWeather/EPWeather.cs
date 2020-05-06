@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace EnergyPlusWeather
             {
                 using (TextReader tr = File.OpenText(filepath))
                 {
-                    var parser = new CsvParser(tr);
+                    var parser = new CsvParser(tr, CultureInfo.InvariantCulture);
                     var row = parser.Read();
                     Location location = new Location();
                     location.CityName = row[1];
@@ -49,7 +50,7 @@ namespace EnergyPlusWeather
                 using (TextReader tr2 = File.OpenText(filepath))
                 {
                     int linect = 0;
-                    var csv = new CsvReader(tr2);
+                    var csv = new CsvReader(tr2, CultureInfo.InvariantCulture);
                     while (csv.Read())
                     {
                         //get the ground temperatures
