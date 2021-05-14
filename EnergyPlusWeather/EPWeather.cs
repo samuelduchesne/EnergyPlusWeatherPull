@@ -30,7 +30,7 @@ namespace EnergyPlusWeather
             {
                 using (TextReader tr = File.OpenText(filepath))
                 {
-                    var parser = new CsvParser(tr, CultureInfo.InvariantCulture);
+                    var parser = new CsvParser(tr, new CultureInfo("en-US", false));
                     var row = parser.Read();
                     Location location = new Location();
                     location.CityName = row[1];
@@ -50,7 +50,11 @@ namespace EnergyPlusWeather
                 using (TextReader tr2 = File.OpenText(filepath))
                 {
                     int linect = 0;
-                    var csv = new CsvReader(tr2, CultureInfo.InvariantCulture);
+                    var csv = new CsvReader(tr2, CultureInfo.CurrentCulture);
+                    csv.Configuration.BadDataFound = x =>
+                    {
+                        Console.WriteLine($"Bad data: <{x.RawRecord}>");
+                    };
                     while (csv.Read())
                     {
                         //get the ground temperatures
